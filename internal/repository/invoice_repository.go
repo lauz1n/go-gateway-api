@@ -45,7 +45,7 @@ func (r *InvoiceRepository) Save(invoice *domain.Invoice) error {
 	return nil
 }
 
-func (r *InvoiceRepository) FindByID(id string) (*domain.Invoice, error) {
+func (r *InvoiceRepository) FindById(id string) (*domain.Invoice, error) {
 	var invoice domain.Invoice
 
 	err := r.db.QueryRow(`

@@ -12,7 +12,7 @@ const (
 	StatusRejected = string(domain.StatusRejected)
 )
 
-type InvoiceInput struct {
+type CreateInvoiceInput struct {
 	APIKey         string
 	Amount         float64 `json:"amount"`
 	Description    string  `json:"description"`
@@ -24,7 +24,7 @@ type InvoiceInput struct {
 	CardHolderName string  `json:"card_holder_name"`
 }
 
-type InvoiceOutput struct {
+type CreateInvoiceOutput struct {
 	ID             string    `json:"id"`
 	AccountID      string    `json:"account_id"`
 	Amount         float64   `json:"amount"`
@@ -36,7 +36,7 @@ type InvoiceOutput struct {
 	UpdatedAt      time.Time `json:"updated_at"`
 }
 
-func ToInvoice(input *InvoiceInput, accountID string) (*domain.Invoice, error) {
+func ToInvoice(input *CreateInvoiceInput, accountID string) (*domain.Invoice, error) {
 	card := domain.CreditCard{
 		Number:         input.CardNumber,
 		CVV:            input.CVV,
@@ -54,8 +54,8 @@ func ToInvoice(input *InvoiceInput, accountID string) (*domain.Invoice, error) {
 	})
 }
 
-func FromInvoice(invoice *domain.Invoice) *InvoiceOutput {
-	return &InvoiceOutput{
+func FromInvoice(invoice *domain.Invoice) *CreateInvoiceOutput {
+	return &CreateInvoiceOutput{
 		ID:             invoice.ID,
 		AccountID:      invoice.AccountID,
 		Amount:         invoice.Amount,
